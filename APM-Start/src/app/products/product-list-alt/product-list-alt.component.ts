@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { EMPTY } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 import { ProductService } from '../product.service';
 
@@ -15,12 +15,12 @@ export class ProductListAltComponent {
   selectedProductId: number;
 
   products$ = this.productService.products$
-  .pipe(
-    catchError(err => {
-      this.errorMessage = err;
-      return EMPTY;
-    })
-  );
+    .pipe(
+      catchError(err => {
+        this.errorMessage = err;
+        return EMPTY;
+      })
+    );
 
   constructor(private productService: ProductService) { }
 
